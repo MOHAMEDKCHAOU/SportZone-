@@ -10,11 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProprietaireSalleRepository::class)]
 class ProprietaireSalle extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
-
     #[ORM\OneToMany(mappedBy: 'proprietaire', targetEntity: SalleDeSport::class)]
     private Collection $salles;
 
@@ -38,14 +33,6 @@ class ProprietaireSalle extends User
     public function gererSalleDeSport(): void
     {
         // Implementation logic for managing gyms
-    }
-
-    /**
-     * Get the ID of the ProprietaireSalle
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     /**

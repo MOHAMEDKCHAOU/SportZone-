@@ -8,11 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
 class Admin extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
-
     // Constructor to initialize properties if needed
     public function __construct()
     {
@@ -37,10 +32,5 @@ class Admin extends User
         // This method can be fleshed out to include actual logic
     }
 
-    // Getters and setters, if needed
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    // No need for additional getters/setters for the id since it inherits from User
 }

@@ -10,11 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
-
     #[ORM\Column(length: 15)]
     private ?string $telephone = null;
 
@@ -31,11 +26,7 @@ class Client extends User
         $this->factures = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
+    // Remove the getId method as it's inherited from User
     public function getTelephone(): ?string
     {
         return $this->telephone;

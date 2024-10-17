@@ -6,11 +6,19 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\InheritanceType("SINGLE_TABLE")]
+#[ORM\DiscriminatorColumn(name: "discriminator", type: "string")]
+#[ORM\DiscriminatorMap([
+    "user" => User::class,
+    "admin" => Admin::class,
+    "client" => Client::class,
+    "proprietaire" => ProprietaireSalle::class // Add ProprietaireSalle here
+])]
 class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -34,6 +42,8 @@ class User
         // Initialization logic can go here
     }
 
+    // Getters and Setters
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,7 +57,6 @@ class User
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -59,7 +68,6 @@ class User
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
-
         return $this;
     }
 
@@ -71,7 +79,6 @@ class User
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -83,7 +90,6 @@ class User
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -95,7 +101,6 @@ class User
     public function setAdresse(string $adresse): static
     {
         $this->adresse = $adresse;
-
         return $this;
     }
 }
