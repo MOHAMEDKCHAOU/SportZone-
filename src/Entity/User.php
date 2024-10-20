@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\InheritanceType("SINGLE_TABLE")]
@@ -14,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
     "client" => Client::class,
     "proprietaire" => ProprietaireSalle::class // Add ProprietaireSalle here
 ])]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -42,7 +44,7 @@ class User
         // Initialization logic can go here
     }
 
-    // Getters and Setters
+    // Getters and Setters...
 
     public function getId(): ?int
     {
@@ -102,5 +104,23 @@ class User
     {
         $this->adresse = $adresse;
         return $this;
+    }
+
+    // Implementing required methods
+    public function getUserIdentifier(): string
+    {
+        return $this->email; // Unique identifier (assuming email is unique)
+    }
+
+    public function getRoles(): array
+    {
+        // Return default roles. Customize as needed based on the user type
+        return ['ROLE_USER']; // Modify based on roles for the specific user
+    }
+
+    public function eraseCredentials(): void
+    {
+        // If you have temporary sensitive data, clear it here
+        // For example, if you had a plain password stored temporarily, clear it
     }
 }

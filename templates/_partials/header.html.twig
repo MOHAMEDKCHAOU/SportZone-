@@ -61,7 +61,17 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Join Us</a>
+                    <!-- Join Us Dropdown -->
+                    <div class="dropdown" style="margin-right: 75px;" >
+                        <button class="btn btn-primary dropdown-toggle py-md-3 px-md-5 d-none d-lg-block" type="button" id="joinUsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Join Us
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="joinUsDropdown">
+                            <li><a class="dropdown-item" href="{{ path('app_register') }}">Sign Up as Client</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_register_proprietaire') }}">Sign Up as Proprietaire Salle</a></li>
+                        </ul>
+                    </div>
+                    <!-- End of Join Us Dropdown -->
                 </div>
             </nav>
         </div>

@@ -1,0 +1,75 @@
+{# templates/proprietaire/creer_salle.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une Nouvelle Salle{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <h1 class="display-2 text-uppercase text-white mb-md-4">Créer une Salle de Sport</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                {{ form_start(SalleDeSportType, {'attr': {'class': 'salle-form'}}) }}
+                <div class="row g-3">
+                    <div class="col-12">
+                        {{ form_row(SalleDeSportType.nomSalle, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(SalleDeSportType.adresse, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(SalleDeSportType.numTel, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(SalleDeSportType.heureOuverture, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(SalleDeSportType.heureFermeture, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100 py-3" type="submit">Créer la Salle</button>
+                    </div>
+                </div>
+                {{ form_end(SalleDeSportType) }}
+            </div>
+
+            <div class="col-lg-6">
+                <img src= "{{ asset('assets/img/salle de sport.jpg') }}"
+                     alt="Salle de Sport Image"
+                     class="img-fluid"
+                     style="height: 457px; object-fit: cover; border-radius: 10px; margin-left: 100px; " >
+            </div>
+        </div>
+    </div>
+{% endblock %}

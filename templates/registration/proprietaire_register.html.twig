@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Proprietaire Registration{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <h1 class="display-2 text-uppercase text-white mb-md-4">Register as Proprietaire</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                {{ form_start(ProprietaireSalleRegistration, {'attr': {'class': 'registration-form'}}) }}
+                <div class="row g-3">
+                    <div class="col-6">
+                        {{ form_row(ProprietaireSalleRegistration.nom, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(ProprietaireSalleRegistration.prenom, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(ProprietaireSalleRegistration.email, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(ProprietaireSalleRegistration.adresse, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(ProprietaireSalleRegistration.password, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(ProprietaireSalleRegistration.confirm_password, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100 py-3" type="submit">Register</button>
+                    </div>
+                </div>
+                {{ form_end(ProprietaireSalleRegistration) }}
+            </div>
+            <div class="col-lg-6">
+                <iframe class="w-100"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                        frameborder="0" style="height: 457px; border:0;" allowfullscreen="" aria-hidden="false"
+                        tabindex="0"></iframe>
+            </div>
+        </div>
+    </div>
+{% endblock %}
