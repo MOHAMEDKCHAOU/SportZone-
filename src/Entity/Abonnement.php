@@ -33,7 +33,7 @@ private ?\DateTimeInterface $dateFin = null;
 #[ORM\JoinColumn(nullable: false)]
 private ?Client $client = null;
 
-#[ORM\ManyToMany(targetEntity: SalleDeSport::class, inversedBy: 'abonnements')]
+#[ORM\ManyToOne(targetEntity: SalleDeSport::class, inversedBy: 'abonnements')]
 private Collection $salles;
 
 #[ORM\ManyToOne(targetEntity: Service::class, inversedBy: 'abonnements')]

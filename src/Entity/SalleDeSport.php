@@ -33,7 +33,7 @@ private ?\DateTimeInterface $heureFermeture = null;
 #[ORM\JoinColumn(nullable: false)]
 private ?ProprietaireSalle $proprietaire = null;
 
-#[ORM\ManyToMany(targetEntity: Abonnement::class, inversedBy: 'salles')]
+#[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'salles')]
 private Collection $abonnements;
 
 public function __construct()

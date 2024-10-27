@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
 
             // Optionally, add a flash message and redirect
             $this->addFlash('success', 'Registration successful! You can now log in.');
-            return $this->redirectToRoute('app_login'); // Redirect to the login page or another appropriate route
+            return $this->redirectToRoute('app_home'); // Redirect to the login page or another appropriate route
         }
 
         return $this->render('registration/client_register.html.twig', [
@@ -63,7 +63,7 @@ class RegistrationController extends AbstractController
 
             // Optionally, add a flash message and redirect
             $this->addFlash('success', 'Registration successful! You can now log in.');
-            return $this->redirectToRoute('app_login'); // Redirect to the login page or another appropriate route
+            return $this->redirectToRoute('app_home'); // Redirect to the login page or another appropriate route
         }
 
         return $this->render('registration/proprietaire_register.html.twig', [
