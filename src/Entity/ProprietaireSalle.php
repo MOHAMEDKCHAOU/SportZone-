@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProprietaireSalleRepository::class)]
 class ProprietaireSalle extends User
 {
-    #[ORM\OneToMany(mappedBy: 'proprietaire', targetEntity: SalleDeSport::class)]
+    #[ORM\OneToMany(mappedBy: 'proprietaire', targetEntity: SalleDeSport::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $salles;
 
     public function __construct()

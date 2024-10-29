@@ -18,14 +18,10 @@
                 <div class="col-md-6">
                     <div class="blog-item">
                         <div class="position-relative overflow-hidden rounded-top">
-                            <img class="img-fluid" src="{{ asset('img/salle.jpg') }}" alt="{{ salle.nomSalle }}">
+                            <img class="img-fluid" src= "{{ asset('assets/img/blog-1.jpg') }}" alt="{{ salle.nomSalle }}">
                         </div>
                         <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-                            <div class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
-                                <span>{{ salle.createdAt|date('d') }}</span>
-                                <h6 class="text-light text-uppercase mb-0">{{ salle.createdAt|date('F') }}</h6>
-                                <span>{{ salle.createdAt|date('Y') }}</span>
-                            </div>
+
                             <div class="ms-3">
                                 <a class="h5 text-uppercase text-light mb-1" href="#">
                                     {{ salle.nomSalle }}

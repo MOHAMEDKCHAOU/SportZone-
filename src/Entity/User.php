@@ -114,8 +114,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        // Return default roles. Customize as needed based on the user type
-        return ['ROLE_USER']; // Modify based on roles for the specific user
+        $roles = ['ROLE_USER'];
+
+        return $roles;
+
     }
 
     public function eraseCredentials(): void

@@ -2,11 +2,6 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
-        # Specify your MariaDB server version here
-        server_version: '10.4.32'  # Replace with your actual MariaDB version
-
-        profiling_collect_backtrace: '%kernel.debug%'
-        use_savepoints: true
 
     orm:
         auto_generate_proxy_classes: true

@@ -1,14 +1,14 @@
 security:
     # Configure password hashing for users
     password_hashers:
-        App\Entity\User: auto  # Hash passwords using the latest algorithm
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: auto  # Use the latest algorithm
 
     # Define how to load users
     providers:
         app_user_provider:
             entity:
-                class: App\Entity\User  # Use the User entity
-                property: email          # Load users by email
+                class: App\Entity\User  # Specify the User entity
+                property: email          # Authenticate users by email
 
     firewalls:
         # Disable security for dev routes (profiler, debug toolbar, etc.)
@@ -16,45 +16,47 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        # Main firewall configuration for authentication and session management
+        # Main firewall for authentication and session management
         main:
-            lazy: true  # Enables on-demand firewall initialization
-            provider: app_user_provider  # Use our user provider
+            pattern: ^/  # Match all routes by default
+            lazy: true  # Delay firewall activation until needed
+            provider: app_user_provider  # Use our custom user provider
 
             # Enable form-based login
             form_login:
-                login_path: app_login         # Route to the login form
-                check_path: login_check       # Route for login submission
-                default_target_path: app_home # Redirect after login (default)
+                login_path: app_login           # Route for displaying login form
+                check_path: login_check         # Route for form submission check
+                default_target_path: app_home   # Redirect after successful login
 
-            # Enable logout handling
+            # Logout configuration
             logout:
-                path: app_logout              # Route to trigger logout
-                target: app_login             # Redirect after logout
+                path: app_logout               # Route to trigger logout
+                target: app_login              # Redirect after logout
 
             # Enable "remember me" functionality (optional)
             remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800  # 1 week in seconds
+                secret: '%kernel.secret%'      # Secret used for cookies
+                lifetime: 604800  # 1 week (in seconds)
                 path: /
 
-    # Define access control for different roles and routes
-    access_control:
-        - { path: ^/proprietaire, roles: ROLE_PROPRIETAIRE }  # ProprietaireSalle access
-        - { path: ^/client, roles: ROLE_CLIENT }              # Client access
-        - { path: ^/admin, roles: ROLE_ADMIN }                # Admin access
+            # Allow requests from unauthenticated users (default behavior)
+            stateless: false
 
-    # Optional: Define role inheritance
+    # Access control rules for different routes and roles
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+    # Role hierarchy to simplify permissions management
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_PROPRIETAIRE, ROLE_CLIENT, ROLE_USER]
         ROLE_PROPRIETAIRE: [ROLE_USER]
         ROLE_CLIENT: [ROLE_USER]
 
 when@test:
+    # Weaken password hashing for tests to speed things up
     security:
         password_hashers:
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4         # For bcrypt: lowest cost
-                time_cost: 3     # For Argon2id: lowest time cost
-                memory_cost: 10  # For Argon2id: lowest memory cost
+                cost: 4         # Lowest cost for bcrypt
+                time_cost: 3     # Lowest time cost for Argon2id
+                memory_cost: 10  # Lowest memory cost for Argon2id
