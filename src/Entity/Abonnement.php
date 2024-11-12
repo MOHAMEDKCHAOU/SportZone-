@@ -36,7 +36,7 @@ private ?Client $client = null;
 #[ORM\ManyToOne(targetEntity: SalleDeSport::class, inversedBy: 'abonnements')]
 private Collection $salles;
 
-#[ORM\ManyToOne(targetEntity: Service::class, inversedBy: 'abonnements')]
+#[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'abonnements')]
 #[ORM\JoinColumn(nullable: false)]
 private ?Service $service = null;
 

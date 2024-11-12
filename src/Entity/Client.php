@@ -15,8 +15,7 @@ private ?string $telephone = null;
 #[ORM\OneToMany(mappedBy: 'client', targetEntity: Abonnement::class)]
 private Collection $abonnements;
 
-#[ORM\OneToMany(mappedBy: 'client', targetEntity: Facture::class)]
-private Collection $factures;
+
 
 public function __construct()
 {

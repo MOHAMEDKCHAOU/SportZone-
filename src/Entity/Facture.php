@@ -25,13 +25,11 @@ private ?float $montantTotal = null;
 #[ORM\Column(type: Types::TEXT)]
 private ?string $description = null;
 
-#[ORM\ManyToOne(targetEntity: Abonnement::class, inversedBy: 'facture')]
+#[ORM\OneToOne(targetEntity: Abonnement::class, inversedBy: 'facture')]
 #[ORM\JoinColumn(nullable: false)]
 private ?Abonnement $abonnement = null;
 
-#[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'factures')]
-#[ORM\JoinColumn(nullable: false)]
-private ?Client $client = null; // Add Client relationship
+
 
 public function getId(): ?int
 {

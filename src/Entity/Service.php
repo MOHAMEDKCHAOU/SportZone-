@@ -21,7 +21,7 @@ class Service
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'service')]
+    #[ORM\ManyToMany(targetEntity: Abonnement::class, mappedBy: 'service')]
     private Collection $abonnements;
 
     public function __construct()
