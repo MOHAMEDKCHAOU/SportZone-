@@ -38,9 +38,18 @@
                                             <a href="#" class="btn btn-primary py-3 px-5">Become A Member</a>
                                         </div>
 
-                                        <!-- Edit Button -->
+                                        <!-- Buttons: Edit and Delete in the same line with the same size -->
                                         <div class="col-12 mt-4">
-                                            <a href="{{ path('abonnement_edit', {'id': abonnement.id}) }}" class="btn btn-warning">Edit</a>
+                                            <div class="d-flex justify-content-between">
+                                                <!-- Edit Button -->
+                                                <a href="{{ path('abonnement_edit', {'id': abonnement.id}) }}" class="btn btn-warning w-48">Edit</a>
+
+                                                <!-- Delete Button -->
+                                                <form method="post" action="{{ path('abonnement_delete', {'id': abonnement.id}) }}" onsubmit="return confirm('Are you sure you want to delete this subscription?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ abonnement.id) }}">
+                                                    <button class="btn btn-danger w-48">Supprimer</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
