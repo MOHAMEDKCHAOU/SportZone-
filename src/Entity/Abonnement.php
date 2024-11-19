@@ -2,11 +2,11 @@
 namespace App\Entity;
 
 use App\Repository\AbonnementRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AbonnementRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Abonnement
 {
 #[ORM\Id]
@@ -15,37 +15,54 @@ class Abonnement
 private ?int $id = null;
 
 #[ORM\Column(length: 255)]
+#[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
+#[Assert\Length(
+max: 255,
+maxMessage: 'Le nom ne peut pas dépasser {{ limit }} caractères.'
+)]
 private ?string $nom = null;
 
 #[ORM\Column(type: 'text')]
 private ?string $description = null;
 
 #[ORM\Column(type: 'float')]
+#[Assert\NotNull(message: 'Le prix doit être défini.')]
+#[Assert\Positive(message: 'Le prix doit être supérieur à zéro.')]
 private ?float $prix = null;
 
 #[ORM\Column(type: 'datetime')]
+#[Assert\NotNull(message: 'La date de début est requise.')]
 private ?\DateTimeInterface $dateDebut = null;
 
 #[ORM\Column(type: 'datetime')]
+#[Assert\NotNull(message: 'La date de fin est requise.')]
+#[Assert\GreaterThan(
+propertyPath: 'dateDebut',
+message: 'La date de fin doit être après la date de début.'
+)]
 private ?\DateTimeInterface $dateFin = null;
 
 #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'abonnements')]
-#[ORM\JoinColumn(nullable: false)]
+#[ORM\JoinColumn(nullable: true)]
 private ?Client $client = null;
 
 #[ORM\ManyToOne(targetEntity: SalleDeSport::class, inversedBy: 'abonnements')]
-private Collection $salles;
-
-#[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'abonnements')]
 #[ORM\JoinColumn(nullable: false)]
+private ?SalleDeSport $salle = null;
+
+#[ORM\ManyToOne(targetEntity: Service::class, inversedBy: 'abonnements')]
+#[ORM\JoinColumn(nullable: true)]
 private ?Service $service = null;
 
 #[ORM\OneToOne(targetEntity: Facture::class, mappedBy: 'abonnement')]
-private ?Facture $facture = null; // Change to a single Facture instance
+private ?Facture $facture = null;
 
-public function __construct()
+#[ORM\PrePersist]
+public function prePersist(): void
 {
-$this->salles = new ArrayCollection();
+if ($this->dateDebut === null) {
+$this->dateDebut = new \DateTime();
+}
 }
 
 public function getId(): ?int
@@ -119,28 +136,14 @@ $this->client = $client;
 return $this;
 }
 
-/**
-* @return Collection<int, SalleDeSport>
-*/
-public function getSalles(): Collection
+public function getSalle(): ?SalleDeSport
 {
-return $this->salles;
+return $this->salle;
 }
 
-public function addSalle(SalleDeSport $salle): self
+public function setSalle(?SalleDeSport $salle): self
 {
-if (!$this->salles->contains($salle)) {
-$this->salles[] = $salle;
-$salle->addAbonnement($this); // Ensures bi-directional relationship
-}
-return $this;
-}
-
-public function removeSalle(SalleDeSport $salle): self
-{
-if ($this->salles->removeElement($salle)) {
-$salle->removeAbonnement($this); // Ensures bi-directional relationship
-}
+$this->salle = $salle;
 return $this;
 }
 

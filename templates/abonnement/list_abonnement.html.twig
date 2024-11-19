@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Abonnement{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-5">
+                            {% for abonnement in abonnements %}
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <div class="bg-dark rounded text-center py-5 px-3">
+                                        <!-- Display the name of the subscription -->
+                                        <h6 class="text-uppercase text-light mb-3">{{ abonnement.nom }}</h6>
+
+                                        <!-- Display the description of the subscription -->
+                                        <p class="text-uppercase text-secondary mb-3">{{ abonnement.description }}</p>
+
+                                        <!-- Display the price of the subscription -->
+                                        <h5 class="text-uppercase text-primary">{{ abonnement.prix }} €</h5>
+
+                                        <!-- Display the start date and end date of the subscription -->
+                                        <p class="text-light mb-3">
+                                            <strong>Start:</strong> {{ abonnement.dateDebut|date('d-m-Y H:i') }}<br>
+                                            <strong>End:</strong> {{ abonnement.dateFin|date('d-m-Y H:i') }}
+                                        </p>
+
+                                        <!-- Display the name of the Salle de Sport -->
+                                        <p class="text-uppercase text-secondary mb-0">
+                                            Salle: {{ abonnement.salle.nomSalle }}
+                                        </p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p>No abonnements found.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
