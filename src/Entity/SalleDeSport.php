@@ -34,7 +34,7 @@ class SalleDeSport
     #[ORM\JoinColumn(nullable: false)]
     private ?ProprietaireSalle $proprietaire = null;
 
-    #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'salles')]
+    #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'salle')]
     private Collection $abonnements;
 
     public function __construct()

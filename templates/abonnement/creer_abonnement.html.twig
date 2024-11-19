@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Nouvel Abonnement{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <h1 class="display-2 text-uppercase text-white mb-md-4">Créer un Abonnement</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                {{ form_start(form, {'attr': {'class': 'abonnement-form'}}) }}
+                <div class="row g-3">
+                    <!-- Nom de l'abonnement -->
+                    <div class="col-12">
+                        {{ form_row(form.nom, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-12">
+                        {{ form_row(form.description, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'rows': '4',
+                                'style': 'height: auto;'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Prix -->
+                    <div class="col-12">
+                        {{ form_row(form.prix, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Date de début -->
+                    <div class="col-6">
+                        {{ form_row(form.dateDebut, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;',
+                                'type': 'datetime-local'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Date de fin -->
+                    <div class="col-6">
+                        {{ form_row(form.dateFin, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;',
+                                'type': 'datetime-local'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Salle de sport (this is the only selectable field in the form) -->
+                    <div class="col-12">
+                        {{ form_row(form.salle, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100 py-3" type="submit">Créer l'Abonnement</button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+
+            <!-- Image -->
+            <div class="col-lg-6">
+                <img src="{{ asset('assets/img/abonnement.jpg') }}"
+                     alt="Image Abonnement"
+                     class="img-fluid"
+                     style="height: 457px; object-fit: cover; border-radius: 10px; margin-left: 100px;">
+            </div>
+        </div>
+    </div>
+{% endblock %}
