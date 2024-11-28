@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Nouveau Service{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <h1 class="display-2 text-uppercase text-white mb-md-4">Créer un Service</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                {{ form_start(form, {'attr': {'class': 'service-form'}}) }}
+                <div class="row g-3">
+                    <!-- Nom du service -->
+                    <div class="col-12">
+                        {{ form_row(form.nom, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-12">
+                        {{ form_row(form.description, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'rows': '4',
+                                'style': 'height: auto;'
+                            }
+                        }) }}
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100 py-3" type="submit">Créer le Service</button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+
+            <!-- Image -->
+            <div class="col-lg-6">
+                <img src="{{ asset('assets/img/services.jpg') }}"
+                     alt="Image Service"
+                     class="img-fluid"
+                     style="height: 457px; object-fit: cover; border-radius: 10px; margin-left: 100px;">
+            </div>
+        </div>
+    </div>
+{% endblock %}

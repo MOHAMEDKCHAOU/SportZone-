@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Salle - {{ salle.nomSalle }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center my-4">Modifier la salle : {{ salle.nomSalle }}</h1>
+
+                {{ form_start(form) }}
+                <div class="form-group mb-3">
+                    {{ form_label(form.nomSalle, 'Nom de la salle', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.nomSalle, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.nomSalle) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.adresse, 'Adresse', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.adresse) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.numTel, 'Numéro de Téléphone', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.numTel, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.numTel) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.heureOuverture, 'Heure d\'ouverture', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.heureOuverture, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.heureOuverture) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.heureFermeture, 'Heure de fermeture', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.heureFermeture, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.heureFermeture) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.image, 'Image de la salle', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.image) }}
+                    {% if salle.image %}
+                        <div class="mt-3">
+                            <p>Image actuelle :</p>
+                            <img src="{{ asset('uploads/' ~ salle.image) }}" alt="{{ salle.nomSalle }}" class="img-fluid" style="max-height: 200px;">
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                    <a href="{{ path('proprietaire_salles') }}" class="btn btn-secondary">Annuler</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

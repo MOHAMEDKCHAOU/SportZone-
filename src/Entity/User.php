@@ -95,6 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -114,10 +115,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        $roles = ['ROLE_USER'];
+        $roles = ['ROLE_USER']; // Default role
+
+        // Check if the current user is an instance of ProprietaireSalle and assign the custom role
+        if ($this instanceof ProprietaireSalle) {
+            $roles[] = 'ROLE_PROPRIETAIRE';  // Add the 'ROLE_PROPRIETAIRE' role for ProprietaireSalle
+        }
 
         return $roles;
-
     }
 
     public function eraseCredentials(): void

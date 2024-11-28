@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {% include '_partials/header.html.twig' %}
+{% endblock %}
+
+{% block title %}Home - Gymster{% endblock %}
+
+{% block body %}
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="{{ asset('assets/img/carousel-1.jpg') }}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase">Best Gym Center</h5>
+                            <h1 class="display-2 text-white text-uppercase mb-md-4">Build Your Body Strong With Gymster</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</a>
+                            <a href="" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="{{ asset('assets/img/carousel-2.jpg') }}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase">Best Gym Center</h5>
+                            <h1 class="display-2 text-white text-uppercase mb-md-4">Grow Your Strength With Our Trainers</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</a>
+                            <a href="" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- My Gyms (Salles de Sport) Start -->
+    <div class="container-fluid bg-light p-5">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="text-uppercase text-dark">My Gym Locations</h2>
+                <p class="text-body mb-0">Explore the gyms I own and manage across the region. Find the one closest to you and start your fitness journey today!</p>
+            </div>
+        </div>
+        <div class="row g-5">
+            {% for salle in salles %}
+                <div class="col-md-6">
+                    <div class="blog-item">
+                        <div class="position-relative overflow-hidden rounded-top">
+                            <img class="img-fluid" src="{{ asset('assets/img/blog-1.jpg') }}" alt="{{ salle.nomSalle }}">
+                        </div>
+                        <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
+                            <div class="ms-3">
+                                <a class="h5 text-uppercase text-light mb-1" href="{{ path('proprietaire_salle_detail', {id: salle.id}) }}">
+                                    {{ salle.nomSalle }}
+                                </a>
+                                <p class="text-secondary mb-0">{{ salle.adresse }}</p>
+                                <p class="text-secondary mb-0">📞 {{ salle.numTel }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center text-muted">No gyms available at the moment.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- My Gyms End -->
+
+    <!-- Program Start -->
+    <div class="container-fluid programe position-relative px-5 mt-5" style="margin-bottom: 135px;">
+        <div class="row g-5 gb-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="bg-light rounded text-center p-5">
+                    <i class="flaticon-six-pack display-1 text-primary"></i>
+                    <h3 class="text-uppercase my-4">Body Building</h3>
+                    <p>Sed amet tempor amet sit kasd sea lorem dolor ipsum elitr dolor amet kasd elitr duo vero amet amet stet</p>
+                    <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="bg-light rounded text-center p-5">
+                    <i class="flaticon-barbell display-1 text-primary"></i>
+                    <h3 class="text-uppercase my-4">Weight Lifting</h3>
+                    <p>Sed amet tempor amet sit kasd sea lorem dolor ipsum elitr dolor amet kasd elitr duo vero amet amet stet</p>
+                    <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="bg-light rounded text-center p-5">
+                    <i class="flaticon-bodybuilding display-1 text-primary"></i>
+                    <h3 class="text-uppercase my-4">Muscle Building</h3>
+                    <p>Sed amet tempor amet sit kasd sea lorem dolor ipsum elitr dolor amet kasd elitr duo vero amet amet stet</p>
+                    <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-6 text-center">
+                <h1 class="text-uppercase text-light mb-4">30% Discount For This Summer</h1>
+                <a href="" class="btn btn-primary py-3 px-5">Become A Member</a>
+            </div>
+        </div>
+    </div>
+    <!-- Program End -->
+{% endblock %}

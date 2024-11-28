@@ -7,14 +7,32 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Entity\Client;
-use App\Entity\ProprietaireSalle;
+use Symfony\Component\Security\Core\Security;
 
 class LoginController extends AbstractController
 {
+    private $security;
+
+    // Inject the Security service via constructor
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // Check if the user is already logged in
+        $user = $this->security->getUser();
+        if ($user) {
+            // Redirect based on the user's role
+            if (in_array('ROLE_PROPRIETAIRE', $user->getRoles())) {
+                return $this->redirectToRoute('proprietaire_salles');  // Redirect to ProprietaireSalle's page
+            } elseif (in_array('ROLE_CLIENT', $user->getRoles())) {
+                return $this->redirectToRoute('app_home');  // Redirect to User's homepage
+            }
+        }
+
         // Get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -26,6 +44,7 @@ class LoginController extends AbstractController
             'error' => $error,
         ]);
     }
+
     #[Route('/login/check', name: 'login_check')]
     public function loginCheck(): Response
     {

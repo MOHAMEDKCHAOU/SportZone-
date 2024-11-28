@@ -2,6 +2,8 @@
 namespace App\Entity;
 
 use App\Repository\AbonnementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -50,19 +52,15 @@ private ?Client $client = null;
 #[ORM\JoinColumn(nullable: false)]
 private ?SalleDeSport $salle = null;
 
-#[ORM\ManyToOne(targetEntity: Service::class, inversedBy: 'abonnements')]
-#[ORM\JoinColumn(nullable: true)]
-private ?Service $service = null;
+#[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'abonnements')]
+private Collection $services;
 
 #[ORM\OneToOne(targetEntity: Facture::class, mappedBy: 'abonnement')]
 private ?Facture $facture = null;
 
-#[ORM\PrePersist]
-public function prePersist(): void
+public function __construct()
 {
-if ($this->dateDebut === null) {
-$this->dateDebut = new \DateTime();
-}
+$this->services = new ArrayCollection();
 }
 
 public function getId(): ?int
@@ -147,14 +145,25 @@ $this->salle = $salle;
 return $this;
 }
 
-public function getService(): ?Service
+/**
+* @return Collection<int, Service>
+*/
+public function getServices(): Collection
 {
-return $this->service;
+return $this->services;
 }
 
-public function setService(?Service $service): self
+public function addService(Service $service): self
 {
-$this->service = $service;
+if (!$this->services->contains($service)) {
+$this->services[] = $service;
+}
+return $this;
+}
+
+public function removeService(Service $service): self
+{
+$this->services->removeElement($service);
 return $this;
 }
 

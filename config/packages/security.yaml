@@ -43,12 +43,13 @@ security:
             stateless: false
 
     # Access control rules for different routes and roles
+
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
     # Role hierarchy to simplify permissions management
     role_hierarchy:
         ROLE_ADMIN: [ROLE_PROPRIETAIRE, ROLE_CLIENT, ROLE_USER]
-        ROLE_PROPRIETAIRE: [ROLE_USER]
+        ROLE_PROPRIETAIRE: [ROLE_PROPRIETAIRE]
         ROLE_CLIENT: [ROLE_USER]
 
 when@test:
