@@ -19,7 +19,7 @@ class LoginController extends AbstractController
         $this->security = $security;
     }
 
-    #[Route('/login', name: 'app_login')]
+    #[Route('/security', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // Check if the user is already logged in
@@ -33,19 +33,19 @@ class LoginController extends AbstractController
             }
         }
 
-        // Get the login error if there is one
+        // Get the security error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // Last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', [
+        return $this->render('security/security.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
     }
 
-    #[Route('/login/check', name: 'login_check')]
+    #[Route('/security/check', name: 'login_check')]
     public function loginCheck(): Response
     {
         // This route will be intercepted by Symfony's security system.
