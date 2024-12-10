@@ -117,9 +117,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = ['ROLE_USER']; // Default role
 
-        // Check if the current user is an instance of ProprietaireSalle and assign the custom role
+
         if ($this instanceof ProprietaireSalle) {
-            $roles[] = 'ROLE_PROPRIETAIRE';  // Add the 'ROLE_PROPRIETAIRE' role for ProprietaireSalle
+            $roles[] = 'ROLE_PROPRIETAIRE';
         }
 
         return $roles;
@@ -127,7 +127,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-        // If you have temporary sensitive data, clear it here
-        // For example, if you had a plain password stored temporarily, clear it
+
     }
 }

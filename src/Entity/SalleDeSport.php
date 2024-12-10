@@ -34,7 +34,7 @@ class SalleDeSport
     private ?string $image = null;
 
     #[ORM\ManyToOne(targetEntity: ProprietaireSalle::class, inversedBy: 'salles')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?ProprietaireSalle $proprietaire = null;
 
     #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'salle')]
@@ -110,11 +110,12 @@ class SalleDeSport
         return $this->proprietaire;
     }
 
-    public function setProprietaire(?ProprietaireSalle $proprietaire): self
+    public function setProprietaire(?ProprietaireSalle $proprietaire): void
     {
         $this->proprietaire = $proprietaire;
-        return $this;
     }
+
+
 
     /**
      * @return Collection<int, Abonnement>
