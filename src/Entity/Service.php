@@ -21,9 +21,8 @@ class Service
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: Abonnement::class, mappedBy: 'service')]
+    #[ORM\ManyToMany(targetEntity: Abonnement::class, mappedBy: 'services')]
     private Collection $abonnements;
-
     public function __construct()
     {
         $this->abonnements = new ArrayCollection();

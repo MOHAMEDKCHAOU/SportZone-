@@ -132,7 +132,17 @@ class AbonnementController extends AbstractController
 
         return $this->redirectToRoute('abonnement_list');
     }
+    #[Route('/all', name: 'abonnement_list_all', methods: ['GET'])]
+    public function listAllAbonnements(AbonnementRepository $abonnementRepository): Response
+    {
+        // Fetch all abonnements from the database
+        $abonnements = $abonnementRepository->findAll();
 
+        // Render the list in the template
+        return $this->render('abonnement/list_all_abonnement.html.twig', [
+            'abonnements' => $abonnements,
+        ]);
+    }
     #[Route('/', name: 'abonnement_list', methods: ['GET'])]
     public function list(AbonnementRepository $abonnementRepository): Response
     {

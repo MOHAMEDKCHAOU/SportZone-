@@ -8,29 +8,22 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
 class Admin extends User
 {
-    // Constructor to initialize properties if needed
     public function __construct()
     {
         parent::__construct(); // Call to the parent User constructor
     }
 
     /**
-     * Manage subscriptions (GererAbonnement)
+     * Assigns the ROLE_ADMIN to this user.
+     *
+     * @return string[]
      */
-    public function GererAbonnement(): void
+    public function getRoles(): array
     {
-        // Implementation logic for managing subscriptions
-        // This method can be fleshed out to include actual logic
+        $roles = parent::getRoles();
+        $roles[] = 'ROLE_ADMIN'; // Ensure the admin role is added
+        return array_unique($roles); // Remove duplicates
     }
 
-    /**
-     * Manage gyms (GererSalleDeSport)
-     */
-    public function GererSalleDeSport(): void
-    {
-        // Implementation logic for managing gyms
-        // This method can be fleshed out to include actual logic
-    }
 
-    // No need for additional getters/setters for the id since it inherits from User
 }

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Services{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <h1 class="display-2 text-uppercase text-white mb-md-4">Liste des Services</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-12">
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="bg-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for service in services %}
+                        <tr>
+                            <td>{{ service.id }}</td>
+                            <td>{{ service.nom }}</td>
+                            <td>{{ service.description }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Aucun service trouvé.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Bouton pour ajouter un nouveau service -->
+            <div class="col-12 text-center">
+                <a href="{{ path('create_service') }}" class="btn btn-primary py-3 px-5">Créer un Nouveau Service</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

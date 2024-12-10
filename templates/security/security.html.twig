@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <h1 class="display-2 text-uppercase text-white mb-md-4">Log in!</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 mx-auto">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email"
+                                   value="{{ last_username }}"
+                                   name="email"
+                                   id="inputEmail"
+                                   class="form-control bg-light border-0 px-4"
+                                   autocomplete="email"
+                                   required
+                                   autofocus
+                                   style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <input type="password"
+                                   name="password"
+                                   id="inputPassword"
+                                   class="form-control bg-light border-0 px-4"
+                                   autocomplete="current-password"
+                                   required
+                                   style="height: 55px;">
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" type="submit">Sign in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

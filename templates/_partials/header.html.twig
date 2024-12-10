@@ -11,12 +11,9 @@
                 <div class="col-lg-7 px-5 text-start">
                     <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                         <i class="fa fa-envelope text-primary me-2"></i>
-                        <h6 class="mb-0">info@example.com</h6>
+                        <h6 class="mb-0">GLSI-B-Equipe@gmail.com</h6>
                     </div>
-                    <div class="h-100 d-inline-flex align-items-center py-2">
-                        <i class="fa fa-phone-alt text-primary me-2"></i>
-                        <h6 class="mb-0">+012 345 6789</h6>
-                    </div>
+
                 </div>
                 <div class="col-lg-5 px-5 text-end">
                     <div class="d-inline-flex align-items-center py-2">
@@ -40,18 +37,17 @@
             </div>
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0 px-lg-5">
                 <a href="index.html" class="navbar-brand d-block d-lg-none">
-                    <h1 class="m-0 display-4 text-primary text-uppercase">Gymster</h1>
+                    <h1 class="m-0 display-4 text-primary text-uppercase">SportZone</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="class.html" class="nav-item nav-link">Classes</a>
-                        <a href="team.html" class="nav-item nav-link">Trainers</a>
+                        <a href="{{ path('app_home') }}" class="nav-item nav-link active">Home</a>
+                        <a href="{{ path('salles_list') }}" class="nav-item nav-link">All Salles</a>
+                        <a href="{{ path('abonnement_list_all') }}" class="nav-item nav-link">All Abonnements</a>
+                        <a href="{{ path('contact_us') }}" class="nav-item nav-link">About</a>
 
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -59,26 +55,24 @@
                                 <a href="blog.html" class="dropdown-item">Blog Grid</a>
                                 <a href="detail.html" class="dropdown-item">Blog Detail</a>
                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        <a href="{{ path('app_login') }}" class="nav-item nav-link">Login</a>
+                        <a href="{{ path('contact_us') }}" class="nav-item nav-link">Contact</a>
                     </div>
                     <!-- Join Us Dropdown -->
                     <div class="dropdown" style="margin-right: 75px;" >
-
-                           <button class="btn btn-primary dropdown-toggle py-md-3 px-md-5 d-none d-lg-block" type="button" id="joinUsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-primary dropdown-toggle py-md-3 px-md-5 d-none d-lg-block" type="button" id="joinUsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Join Us
-                            </button>
-
-                        </ul>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="joinUsDropdown">
                             <li><a class="dropdown-item" href="{{ path('app_register') }}">Sign Up as Client</a></li>
                             <li><a class="dropdown-item" href="{{ path('app_register_proprietaire') }}">Sign Up as Proprietaire Salle</a></li>
                         </ul>
+
                     </div>
-                    <!-- End of Join Us Dropdown -->
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-light py-md-3 px-md-5 d-none d-lg-block">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </a>
                 </div>
             </nav>
         </div>

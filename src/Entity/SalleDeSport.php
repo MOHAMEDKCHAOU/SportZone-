@@ -30,8 +30,11 @@ class SalleDeSport
     #[ORM\Column(type: 'time')]
     private ?\DateTimeInterface $heureFermeture = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $image = null;
+
     #[ORM\ManyToOne(targetEntity: ProprietaireSalle::class, inversedBy: 'salles')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?ProprietaireSalle $proprietaire = null;
 
     #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'salle')]
@@ -107,11 +110,12 @@ class SalleDeSport
         return $this->proprietaire;
     }
 
-    public function setProprietaire(?ProprietaireSalle $proprietaire): self
+    public function setProprietaire(?ProprietaireSalle $proprietaire): void
     {
         $this->proprietaire = $proprietaire;
-        return $this;
     }
+
+
 
     /**
      * @return Collection<int, Abonnement>
@@ -135,6 +139,16 @@ class SalleDeSport
         if ($this->abonnements->removeElement($abonnement)) {
             $abonnement->removeSalle($this); // Ensures bi-directional relationship
         }
+        return $this;
+    }
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
         return $this;
     }
 }

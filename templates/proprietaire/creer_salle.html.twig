@@ -15,10 +15,11 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-6">
-                {{ form_start(SalleDeSportType, {'attr': {'class': 'salle-form'}}) }}
+                {# Form to create the SalleDeSport #}
+                {{ form_start(form, {'attr': {'class': 'salle-form'}}) }}
                 <div class="row g-3">
                     <div class="col-12">
-                        {{ form_row(SalleDeSportType.nomSalle, {
+                        {{ form_row(form.nomSalle, {
                             'attr': {
                                 'class': 'form-control bg-light border-0 px-4',
                                 'style': 'height: 55px;'
@@ -26,7 +27,7 @@
                         }) }}
                     </div>
                     <div class="col-12">
-                        {{ form_row(SalleDeSportType.adresse, {
+                        {{ form_row(form.adresse, {
                             'attr': {
                                 'class': 'form-control bg-light border-0 px-4',
                                 'style': 'height: 55px;'
@@ -34,7 +35,7 @@
                         }) }}
                     </div>
                     <div class="col-12">
-                        {{ form_row(SalleDeSportType.numTel, {
+                        {{ form_row(form.numTel, {
                             'attr': {
                                 'class': 'form-control bg-light border-0 px-4',
                                 'style': 'height: 55px;'
@@ -42,7 +43,7 @@
                         }) }}
                     </div>
                     <div class="col-6">
-                        {{ form_row(SalleDeSportType.heureOuverture, {
+                        {{ form_row(form.heureOuverture, {
                             'attr': {
                                 'class': 'form-control bg-light border-0 px-4',
                                 'style': 'height: 55px;'
@@ -50,25 +51,37 @@
                         }) }}
                     </div>
                     <div class="col-6">
-                        {{ form_row(SalleDeSportType.heureFermeture, {
+                        {{ form_row(form.heureFermeture, {
                             'attr': {
                                 'class': 'form-control bg-light border-0 px-4',
                                 'style': 'height: 55px;'
                             }
                         }) }}
                     </div>
+
+                    {# Image Upload Field #}
+                    <div class="col-12">
+                        {{ form_row(form.image, {
+                            'attr': {
+                                'class': 'form-control bg-light border-0 px-4',
+                                'style': 'height: 55px;'
+                            }
+                        }) }}
+                    </div>
+
                     <div class="col-12">
                         <button class="btn btn-primary w-100 py-3" type="submit">Créer la Salle</button>
                     </div>
                 </div>
-                {{ form_end(SalleDeSportType) }}
+                {{ form_end(form) }}
             </div>
 
+            {# Image Placeholder for UI #}
             <div class="col-lg-6">
-                <img src= "{{ asset('assets/img/salle de sport.jpg') }}"
+                <img src="{{ asset('assets/img/salle.jpg') }}"
                      alt="Salle de Sport Image"
                      class="img-fluid"
-                     style="height: 457px; object-fit: cover; border-radius: 10px; margin-left: 100px; " >
+                     style="height: 457px; object-fit: cover; border-radius: 10px; margin-left: 100px;">
             </div>
         </div>
     </div>

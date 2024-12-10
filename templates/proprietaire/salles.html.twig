@@ -1,4 +1,3 @@
-{# templates/proprietaire/salles.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Mes Salles{% endblock %}
@@ -8,6 +7,7 @@
         <div class="row py-5">
             <div class="col-12 text-center">
                 <h1 class="display-2 text-uppercase text-white mb-md-4">Mes Salles de Sport</h1>
+                <a href="{{ path('proprietaire_salle_creer') }}" class="btn btn-light btn-lg mt-3">Créer une Nouvelle Salle</a>
             </div>
         </div>
     </div>
@@ -18,23 +18,39 @@
                 <div class="col-md-6">
                     <div class="blog-item">
                         <div class="position-relative overflow-hidden rounded-top">
-                            <img class="img-fluid" src= "{{ asset('assets/img/blog-1.jpg') }}" alt="{{ salle.nomSalle }}">
+                            {% if salle.image %}
+                                <img
+                                        src="{{ asset('uploads/' ~ salle.image) }}"
+                                        alt="Image of {{ salle.nomSalle }}"
+                                        class="img-fluid"
+                                        style="max-height: 300px; width: 100%; object-fit: cover;" />
+                            {% else %}
+                                <img
+                                        src="{{ asset('path/to/placeholder.jpg') }}"
+                                        alt="Placeholder image for {{ salle.nomSalle }}"
+                                        class="img-fluid"
+                                        style="max-height: 300px; width: 100%; object-fit: cover;" />
+                            {% endif %}
                         </div>
                         <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-
                             <div class="ms-3">
-                                <a class="h5 text-uppercase text-light mb-1" href="#">
+                                <a class="h5 text-uppercase text-light mb-1" href="{{ path('proprietaire_salle_abonnements', {'id': salle.id}) }}">
                                     {{ salle.nomSalle }}
                                 </a>
                                 <p class="text-secondary mb-0">{{ salle.adresse }}</p>
                                 <p class="text-secondary mb-0">📞 {{ salle.numTel }}</p>
 
-                                {# Delete button/link #}
-                                <form method="post"
-                                      action="{{ path('proprietaire_salle_supprimer', {id: salle.id}) }}"
-                                      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette salle ?');">
-                                    <button type="submit" class="btn btn-danger mt-3">Supprimer</button>
-                                </form>
+                                <div class="d-flex mt-3">
+                                    {# Edit button/link #}
+                                    <a href="{{ path('proprietaire_salle_modifier', {id: salle.id}) }}" class="btn btn-warning me-2">Modifier</a>
+
+                                    {# Delete button/link #}
+                                    <form method="post"
+                                          action="{{ path('proprietaire_salle_supprimer', {id: salle.id}) }}"
+                                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette salle ?');">
+                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

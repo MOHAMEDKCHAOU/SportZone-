@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Salles{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-primary p-5 mb-5">
+        <div class="row py-5">
+            <div class="col-12 text-center">
+                <h1 class="display-2 text-uppercase text-white mb-md-4">All Salles de Sport</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            {% for salle in salles %}
+                <div class="col-md-6">
+                    <div class="blog-item">
+                        <div class="position-relative overflow-hidden rounded-top">
+                            {% if salle.image %}
+                                <img
+                                        src="{{ asset('uploads/' ~ salle.image) }}"
+                                        alt="{{ salle.nomSalle }}"
+                                        class="img-fluid"
+                                        style="max-height: 300px; width: 100%; object-fit: cover;" />
+                            {% else %}
+                                <img
+                                        src="{{ asset('path/to/placeholder.jpg') }}"
+                                        alt="Placeholder image"
+                                        class="img-fluid"
+                                        style="max-height: 300px; width: 100%; object-fit: cover;" />
+                            {% endif %}
+                        </div>
+                        <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
+                            <div class="ms-3">
+                                <h5 class="text-uppercase text-light mb-1">{{ salle.nomSalle }}</h5>
+                                <p class="text-secondary mb-0">{{ salle.adresse }}</p>
+                                <p class="text-secondary mb-0">📞 {{ salle.numTel }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center text-muted">No salles available.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

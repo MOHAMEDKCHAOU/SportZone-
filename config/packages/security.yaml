@@ -21,34 +21,27 @@ security:
             pattern: ^/  # Match all routes by default
             lazy: true  # Delay firewall activation until needed
             provider: app_user_provider  # Use our custom user provider
-
-            # Enable form-based login
-            form_login:
-                login_path: app_login           # Route for displaying login form
-                check_path: login_check         # Route for form submission check
-                default_target_path: app_home   # Redirect after successful login
-
-            # Logout configuration
+            custom_authenticator: App\Security\UserAuthenticator
             logout:
-                path: app_logout               # Route to trigger logout
-                target: app_login              # Redirect after logout
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
-            # Enable "remember me" functionality (optional)
             remember_me:
-                secret: '%kernel.secret%'      # Secret used for cookies
-                lifetime: 604800  # 1 week (in seconds)
+                secret: '%kernel.secret%'
+                lifetime: 604800
                 path: /
+                always_remember_me: true
 
-            # Allow requests from unauthenticated users (default behavior)
-            stateless: false
-
+            
     # Access control rules for different routes and roles
+
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
     # Role hierarchy to simplify permissions management
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_PROPRIETAIRE, ROLE_CLIENT, ROLE_USER]
-        ROLE_PROPRIETAIRE: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_CLIENT, ROLE_USER]
+        ROLE_PROPRIETAIRE: [ROLE_PROPRIETAIRE]
         ROLE_CLIENT: [ROLE_USER]
 
 when@test:
