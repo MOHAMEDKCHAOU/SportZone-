@@ -3,7 +3,7 @@
     <div class="row gx-0">
         <div class="col-lg-3 bg-dark d-none d-lg-block">
             <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                <h1 class="m-0 display-4 text-primary text-uppercase">Gymster</h1>
+                <h1 class="m-0 display-4 text-primary text-uppercase">SportZone</h1>
             </a>
         </div>
         <div class="col-lg-9">
@@ -48,24 +48,31 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
+
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="class.html" class="nav-item nav-link">Classes</a>
                         <a href="team.html" class="nav-item nav-link">Trainers</a>
+
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="blog.html" class="dropdown-item">Blog Grid</a>
                                 <a href="detail.html" class="dropdown-item">Blog Detail</a>
                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{{ path('app_login') }}" class="nav-item nav-link">Login</a>
                     </div>
                     <!-- Join Us Dropdown -->
                     <div class="dropdown" style="margin-right: 75px;" >
-                        <button class="btn btn-primary dropdown-toggle py-md-3 px-md-5 d-none d-lg-block" type="button" id="joinUsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+
+                           <button class="btn btn-primary dropdown-toggle py-md-3 px-md-5 d-none d-lg-block" type="button" id="joinUsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Join Us
-                        </button>
+                            </button>
+
+                        </ul>
                         <ul class="dropdown-menu" aria-labelledby="joinUsDropdown">
                             <li><a class="dropdown-item" href="{{ path('app_register') }}">Sign Up as Client</a></li>
                             <li><a class="dropdown-item" href="{{ path('app_register_proprietaire') }}">Sign Up as Proprietaire Salle</a></li>
