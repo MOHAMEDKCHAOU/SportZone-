@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller\Admin;
-
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\ProprietaireSalle;
 use App\Entity\SalleDeSport;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -41,29 +41,34 @@ class ProprietaireSalleCrudController extends AbstractCrudController
     public function createEntity(string $entityFqcn)
     {
         $entity = parent::createEntity($entityFqcn);
-        if ($entity instanceof ProprietaireSalle) {
+        if ($entity instanceof ProprietaireSalle && $entity->getPassword()) {
             $entity->setPassword(
                 $this->passwordHasher->hashPassword(
                     $entity,
-                    $entity->getPassword() // Retrieve the plain password from the entity
+                    $entity->getPassword() // Ensure password is non-null
                 )
             );
         }
-
         return $entity;
     }
 
-    public function updateEntity($entityInstance): void
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if ($entityInstance instanceof ProprietaireSalle) {
-            $entityInstance->setPassword(
-                $this->passwordHasher->hashPassword(
-                    $entityInstance,
-                    $entityInstance->getPassword() // Retrieve the plain password from the entity
-                )
-            );
+            $plainPassword = $entityInstance->getPassword();
+
+            // Only hash the password if a new one is provided
+            if (!empty($plainPassword)) {
+                $entityInstance->setPassword(
+                    $this->passwordHasher->hashPassword(
+                        $entityInstance,
+                        $plainPassword
+                    )
+                );
+            }
         }
 
-        parent::updateEntity($entityInstance);
+        $entityManager->persist($entityInstance);
+        $entityManager->flush();
     }
 }
