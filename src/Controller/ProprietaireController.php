@@ -162,15 +162,27 @@ class ProprietaireController extends AbstractController
         ]);
     }
     #[Route('/salles_all', name: 'salles_list')]
-    public function listAllSalles(SalleDeSportRepository $salleRepo): Response
+    public function listAllSalles(Request $request, SalleDeSportRepository $salleRepo): Response
     {
-        // Fetch all Salles from the database
-        $salles = $salleRepo->findAll();
+        // Get the search query from the request
+        $search = $request->query->get('search', '');
+
+        // Fetch salles with optional filtering by address
+        $queryBuilder = $salleRepo->createQueryBuilder('salle');
+
+        if ($search) {
+            $queryBuilder->andWhere('salle.adresse LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        $salles = $queryBuilder->getQuery()->getResult();
 
         return $this->render('proprietaire/list_all.html.twig', [
             'salles' => $salles,
+            'search' => $search, // Pass search term to template for pre-filling the input
         ]);
     }
+
     #[Route('/proprietaire/salle/{id}/abonnements', name: 'proprietaire_salle_abonnements')]
     public function showAbonnements(SalleDeSport $salle): Response
     {

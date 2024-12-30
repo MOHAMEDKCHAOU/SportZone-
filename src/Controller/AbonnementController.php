@@ -133,14 +133,28 @@ class AbonnementController extends AbstractController
         return $this->redirectToRoute('abonnement_list');
     }
     #[Route('/all', name: 'abonnement_list_all', methods: ['GET'])]
-    public function listAllAbonnements(AbonnementRepository $abonnementRepository): Response
+    public function listAllAbonnements(Request $request, AbonnementRepository $abonnementRepository, EntityManagerInterface $entityManager): Response
     {
-        // Fetch all abonnements from the database
-        $abonnements = $abonnementRepository->findAll();
+        // Get the search query from the request
+        $serviceName = $request->query->get('service_name', '');
+
+        // Fetch abonnements based on the service name if a search query is provided
+        if (!empty($serviceName)) {
+            $queryBuilder = $entityManager->getRepository(Abonnement::class)->createQueryBuilder('a');
+            $queryBuilder
+                ->leftJoin('a.services', 's') // Join the services relation
+                ->where('s.nom LIKE :serviceName') // Filter by service name
+                ->setParameter('serviceName', '%' . $serviceName . '%');
+            $abonnements = $queryBuilder->getQuery()->getResult();
+        } else {
+            // Fetch all abonnements if no search query is provided
+            $abonnements = $abonnementRepository->findAll();
+        }
 
         // Render the list in the template
         return $this->render('abonnement/list_all_abonnement.html.twig', [
             'abonnements' => $abonnements,
+            'service_name' => $serviceName, // Pass the search query back for the form
         ]);
     }
     #[Route('/', name: 'abonnement_list', methods: ['GET'])]

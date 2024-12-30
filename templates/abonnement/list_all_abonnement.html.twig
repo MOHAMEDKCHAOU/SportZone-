@@ -3,6 +3,20 @@
 {% block title %}Liste Abonnement{% endblock %}
 
 {% block body %}
+
+    <!-- Search Form -->
+    <form method="get" action="{{ path('abonnement_list_all') }}" class="mb-3">
+        <div class="input-group">
+            <input
+                    type="text"
+                    name="service_name"
+                    class="form-control form-control-lg bg-white border-secondary"
+                    placeholder="Search Abonnement by service name (Exp Teakwendo,Box,Musculation...)"
+                    value="{{ service_name|default('') }}"
+            >
+            <button class="btn btn-primary btn-lg" type="submit">Search</button>
+        </div>
+    </form>
     <div class="container-fluid bg-primary p-5 mb-5">
         <div class="row py-5">
             <div class="col-12 text-center">
